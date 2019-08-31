@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Remoting.Contexts;
 using System.Threading;
 using System.Threading.Tasks;
 //Открыть параллельно два файла и записывать из них информацию
@@ -44,7 +43,6 @@ namespace Task1
             stream3.Close();
             Console.WriteLine("Для выхода нажмите любую кнопку...");
             Console.ReadKey();
-        }
-            
+        }            
     }
 }
