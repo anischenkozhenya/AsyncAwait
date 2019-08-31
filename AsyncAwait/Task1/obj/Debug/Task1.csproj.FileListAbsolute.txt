@@ -1,0 +1,7 @@
+E:\AsyncAwait\AsyncAwait\AsyncAwait\Task1\bin\Debug\Task1.exe.config
+E:\AsyncAwait\AsyncAwait\AsyncAwait\Task1\bin\Debug\Task1.exe
+E:\AsyncAwait\AsyncAwait\AsyncAwait\Task1\bin\Debug\Task1.pdb
+E:\AsyncAwait\AsyncAwait\AsyncAwait\Task1\obj\Debug\Task1.csprojAssemblyReference.cache
+E:\AsyncAwait\AsyncAwait\AsyncAwait\Task1\obj\Debug\Task1.csproj.CoreCompileInputs.cache
+E:\AsyncAwait\AsyncAwait\AsyncAwait\Task1\obj\Debug\Task1.exe
+E:\AsyncAwait\AsyncAwait\AsyncAwait\Task1\obj\Debug\Task1.pdb
