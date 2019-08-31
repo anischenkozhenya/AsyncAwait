@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Задание 3" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="18"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"></RowDefinition>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="300"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Margin="2">
+            <TextBox x:Name="TextboxMain" />
+        </ScrollViewer>
+
+
+        <Button x:Name="ConnectToDataBase" Grid.Column="1" Grid.Row="3" Click="ConnectToDataBase_Click" Content="Подключиться к базам данных" Margin="1"/>
+        <Button x:Name="ConnectToDataBase_Copy" Grid.Column="2" Grid.Row="3" Click="ConnectToDataBase_Copy_Click" Content="Отключиться от бызы данных" Margin="1"/>
+
     </Grid>
 </Window>
