@@ -10,20 +10,20 @@ namespace Task1
 {
     class Program
     {
-              
-        static Mutex mutex = new Mutex();
-        
-        static async void ReadMethod(object obj)
-        {
-            object[] arr = obj as object[];
-            string str = ((StreamReader)arr[0]).ReadToEnd();
-            mutex.WaitOne();
-            {
-                await ((StreamWriter)arr[1]).WriteAsync(str);
-            }
-            mutex.ReleaseMutex();
-        }
 
+        static Mutex mutex = new Mutex();
+        static async Task OperationMethodAsync(object obj)
+        {
+            await Task.Factory.StartNew(()=>{ object[] strArr = obj as object[];
+                string str=((StreamReader)strArr[0]).ReadToEnd();
+                mutex.WaitOne();
+                {
+                    ((StreamWriter)strArr[1]).WriteAsync(str);
+                }
+                mutex.ReleaseMutex();
+            });
+        }
+       
         static void Main(string[] args)
         {
             string path = @"..\..\";
@@ -33,10 +33,8 @@ namespace Task1
             object[] vs1 = {stream1, stream3};
             object[] vs2 = {stream2, stream3};
             Process.Start("explorer.exe", path);
-            Task task1 = new Task(new Action<object>(ReadMethod),vs1);
-            Task task2 = new Task(new Action<object>(ReadMethod),vs2);
-            task1.Start();
-            task2.Start();
+            Task task1 = OperationMethodAsync(vs1);
+            Task task2 = OperationMethodAsync(vs2);
             Task.WaitAll(task1, task2);
             stream1.Close();
             stream2.Close();
