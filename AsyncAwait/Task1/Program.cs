@@ -12,17 +12,26 @@ namespace Task1
     {
               
         static Mutex mutex = new Mutex();
-        
-        static async void ReadMethod(object obj)
+        static async Task OperationMethodAsync(StreamReader streamReader, StreamWriter streamWriter)
         {
-            object[] arr = obj as object[];
-            string str = ((StreamReader)arr[0]).ReadToEnd();
+            await Task.Run(() => { 
+            string str = streamReader.ReadToEnd();
             mutex.WaitOne();
             {
-                await ((StreamWriter)arr[1]).WriteAsync(str);
+                streamWriter.WriteAsync(str);
             }
-            mutex.ReleaseMutex();
+            mutex.ReleaseMutex(); });
         }
+        //static async void ReadMethod(object obj)
+        //{
+        //    object[] arr = obj as object[];
+        //    string str = ((StreamReader)arr[0]).ReadToEnd();
+        //    mutex.WaitOne();
+        //    {
+        //        await ((StreamWriter)arr[1]).WriteAsync(str);
+        //    }
+        //    mutex.ReleaseMutex();
+        //}
 
         static void Main(string[] args)
         {
@@ -30,13 +39,15 @@ namespace Task1
             StreamReader stream1 = File.OpenText(path + "TextFile1.txt");
             StreamReader stream2 = File.OpenText(path + "TextFile2.txt");
             StreamWriter stream3 = File.CreateText(path + "TextFile3.txt");
-            object[] vs1 = {stream1, stream3};
-            object[] vs2 = {stream2, stream3};
+            //object[] vs1 = {stream1, stream3};
+            //object[] vs2 = {stream2, stream3};
             Process.Start("explorer.exe", path);
-            Task task1 = new Task(new Action<object>(ReadMethod),vs1);
-            Task task2 = new Task(new Action<object>(ReadMethod),vs2);
-            task1.Start();
-            task2.Start();
+            Task task1 = OperationMethodAsync(stream1, stream3);
+            Task task2 = OperationMethodAsync(stream2, stream3);
+            //Task task1 = new Task(new Action<object>(ReadMethod),vs1);
+            //Task task2 = new Task(new Action<object>(ReadMethod),vs2);
+            //task1.Start();
+            //task2.Start();
             Task.WaitAll(task1, task2);
             stream1.Close();
             stream2.Close();
